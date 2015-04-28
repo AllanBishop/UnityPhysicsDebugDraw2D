@@ -1,6 +1,6 @@
 # Unity Debug Draw Physics 2D
 
-Unity Debug Draw Physics 2D allows you to quickly view a scene created with Unity's 2D Physics engine. The script automatically renders all colliders and joints in both the editor and game view.
+Instantly renders Unity's 2D physics colliders and joints as a wireframe for rapid prototyping. The wireframe is viewable in both the editor and game view.
 
 ## Screenshot
 
