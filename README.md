@@ -1,6 +1,6 @@
 # Unity Physics Debug Draw 2D
 
-Instantly renders Unity's 2D physics colliders and joints as a wireframe for rapid prototyping. The wireframe is viewable in both the editor and game view.
+Instantly renders Unity's 2D physics colliders and joints as wireframes for rapid prototyping. The wireframe is viewable in both the editor and game view.
 
 ## Screenshot
 
