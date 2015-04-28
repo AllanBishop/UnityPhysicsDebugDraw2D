@@ -17,9 +17,9 @@ Instantly renders Unity's 2D physics colliders and joints as a wireframe for rap
 
 ### Download
 
-- [Download UnityDebugDrawPhysics2D](https://github.com/AllanBishop/UnityDebugDrawPhysics2D/archive/master.zip) files from GitHub.
+- [Download UnityPhysicsDebugDraw2D](https://github.com/AllanBishop/UnityPhysicsDebugDraw2D/archive/master.zip) files from GitHub.
 
 
 ## License
 
-See the [LICENSE](https://github.com/AllanBishop/UnityDebugDrawPhysics2D/blob/master/LICENSE.md) file.
+See the [LICENSE](https://github.com/AllanBishop/UnityPhysicsDebugDraw2D/blob/master/LICENSE.md) file.
