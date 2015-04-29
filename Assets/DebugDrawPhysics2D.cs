@@ -211,62 +211,59 @@ public class DebugDrawPhysics2D : MonoBehaviour
 
 	void OnDrawGizmos() 
 	{
-		boxColliders2D = (BoxCollider2D[])Resources.FindObjectsOfTypeAll(typeof(BoxCollider2D));
-		boxPointList = new Vector3[boxColliders2D.Length][];
+		if (!Application.isPlaying) 
+		{
+			boxColliders2D = (BoxCollider2D[])Resources.FindObjectsOfTypeAll (typeof(BoxCollider2D));
+			boxPointList = new Vector3[boxColliders2D.Length][];
 
-		circleColliders2D = (CircleCollider2D[])Resources.FindObjectsOfTypeAll (typeof(CircleCollider2D));
-		circlePointList = new Vector3[circleColliders2D.Length][];
+			circleColliders2D = (CircleCollider2D[])Resources.FindObjectsOfTypeAll (typeof(CircleCollider2D));
+			circlePointList = new Vector3[circleColliders2D.Length][];
 
-		polygonColliders2D = (PolygonCollider2D[])Resources.FindObjectsOfTypeAll(typeof(PolygonCollider2D));
-		polygonPointList = new Vector3[polygonColliders2D.Length][];
+			polygonColliders2D = (PolygonCollider2D[])Resources.FindObjectsOfTypeAll (typeof(PolygonCollider2D));
+			polygonPointList = new Vector3[polygonColliders2D.Length][];
 		
-		edgeColliders2D = (EdgeCollider2D[])Resources.FindObjectsOfTypeAll (typeof(EdgeCollider2D));
-		edgePointList = new Vector3[edgeColliders2D.Length][];
+			edgeColliders2D = (EdgeCollider2D[])Resources.FindObjectsOfTypeAll (typeof(EdgeCollider2D));
+			edgePointList = new Vector3[edgeColliders2D.Length][];
 
-		anchoredJoints2D = (AnchoredJoint2D[])Resources.FindObjectsOfTypeAll (typeof(AnchoredJoint2D));
-		anchoredJointPointList = new Vector3[anchoredJoints2D.Length][];
+			anchoredJoints2D = (AnchoredJoint2D[])Resources.FindObjectsOfTypeAll (typeof(AnchoredJoint2D));
+			anchoredJointPointList = new Vector3[anchoredJoints2D.Length][];
 
-		for(int i = 0; i< boxColliders2D.Length;i++)
-		{
-			BoxCollider2D collider = boxColliders2D[i];
-			Vector3[] boundPoints = GetBoxPoints(collider);
-			boxPointList[i] = boundPoints;
-		}
+			for (int i = 0; i< boxColliders2D.Length; i++) {
+				BoxCollider2D collider = boxColliders2D [i];
+				Vector3[] boundPoints = GetBoxPoints (collider);
+				boxPointList [i] = boundPoints;
+			}
 
-		for(int i = 0; i< circleColliders2D.Length;i++)
-		{
-			CircleCollider2D collider = circleColliders2D[i];
-			Vector3[] circlePoints = GetCircleColliderPoints(collider, 40);
-			circlePointList[i] = circlePoints;
-		}
+			for (int i = 0; i< circleColliders2D.Length; i++) {
+				CircleCollider2D collider = circleColliders2D [i];
+				Vector3[] circlePoints = GetCircleColliderPoints (collider, 40);
+				circlePointList [i] = circlePoints;
+			}
 
-		for(int i = 0; i< polygonColliders2D.Length;i++)
-		{
-			PolygonCollider2D collider = polygonColliders2D[i];
-			Vector3[] polygonPoints = GetPolygonPoints(collider);
-			polygonPointList[i] = polygonPoints;
-		}
+			for (int i = 0; i< polygonColliders2D.Length; i++) {
+				PolygonCollider2D collider = polygonColliders2D [i];
+				Vector3[] polygonPoints = GetPolygonPoints (collider);
+				polygonPointList [i] = polygonPoints;
+			}
 		
-		for(int i = 0; i< edgeColliders2D.Length;i++)
-		{
-			EdgeCollider2D collider = edgeColliders2D[i];
-			Vector3[] edgePoints = GetEdgePoints(collider);
-			edgePointList[i] = edgePoints;
-		}
+			for (int i = 0; i< edgeColliders2D.Length; i++) {
+				EdgeCollider2D collider = edgeColliders2D [i];
+				Vector3[] edgePoints = GetEdgePoints (collider);
+				edgePointList [i] = edgePoints;
+			}
 
-		for(int i = 0; i< anchoredJoints2D.Length;i++)
-		{
-			AnchoredJoint2D anchoredJoint = anchoredJoints2D[i];
-			Vector3[] anchoredJointPoints = GetAnchoredJointPoints(anchoredJoint);
-			anchoredJointPointList[i] = anchoredJointPoints;
-		}
+			for (int i = 0; i< anchoredJoints2D.Length; i++) {
+				AnchoredJoint2D anchoredJoint = anchoredJoints2D [i];
+				Vector3[] anchoredJointPoints = GetAnchoredJointPoints (anchoredJoint);
+				anchoredJointPointList [i] = anchoredJointPoints;
+			}
 	
-		DrawBox2DGizmo(boxPointList);
-		DrawBox2DGizmo(circlePointList);
-		DrawBox2DGizmo(polygonPointList);
-		DrawBox2DGizmo(edgePointList);
-		DrawBox2DGizmo(anchoredJointPointList);
-		
+			DrawBox2DGizmo (boxPointList);
+			DrawBox2DGizmo (circlePointList);
+			DrawBox2DGizmo (polygonPointList);
+			DrawBox2DGizmo (edgePointList);
+			DrawBox2DGizmo (anchoredJointPointList);
+		}
 	}
 
 	void DrawBox2DGizmo(Vector3[][] colliderPoints)
