@@ -36,15 +36,18 @@ public class DebugDrawPhysics2D : MonoBehaviour
 	private BoxCollider2D[] boxColliders2D;
 	private PolygonCollider2D[] polygonColliders2D;
 	private CircleCollider2D[] circleColliders2D;
+	private EdgeCollider2D[] edgeColliders2D;
 	private AnchoredJoint2D[] anchoredJoints2D;
 	private Vector3[][] boxPointList;
 	private Vector3[][] circlePointList;
 	private Vector3[][] polygonPointList;
+	private Vector3[][] edgePointList;
 	private Vector3[][] anchoredJointPointList;
 
 	public Color circleColour = Color.white;
 	public Color polygonColour = Color.white;
 	public Color boxColour = Color.white;
+	public Color edgeColour = Color.white;
 	public Color jointColour = Color.yellow;
 	
 	void Start () 
@@ -54,6 +57,7 @@ public class DebugDrawPhysics2D : MonoBehaviour
 		polygonColliders2D = (PolygonCollider2D[])Resources.FindObjectsOfTypeAll(typeof(PolygonCollider2D));
 		circleColliders2D = (CircleCollider2D[])Resources.FindObjectsOfTypeAll (typeof(CircleCollider2D));
 		anchoredJoints2D = (AnchoredJoint2D[])Resources.FindObjectsOfTypeAll (typeof(AnchoredJoint2D));
+		edgeColliders2D = (EdgeCollider2D[])Resources.FindObjectsOfTypeAll (typeof(EdgeCollider2D));
 	}
 
 	void Update () 
@@ -84,6 +88,15 @@ public class DebugDrawPhysics2D : MonoBehaviour
 			polygonPointList[i] = polygonPoints;
 		}
 		
+		edgePointList = new Vector3[edgeColliders2D.Length][];
+		
+		for(int i = 0; i< edgeColliders2D.Length;i++)
+		{
+			EdgeCollider2D collider = edgeColliders2D[i];
+			Vector3[] edgePoints = GetEdgePoints(collider);
+			edgePointList[i] = edgePoints;
+		}
+		
 		anchoredJointPointList = new Vector3[anchoredJoints2D.Length][];
 		
 		for(int i = 0; i< anchoredJoints2D.Length;i++)
@@ -105,6 +118,19 @@ public class DebugDrawPhysics2D : MonoBehaviour
 		}
 
 		points [collider.points.Length] = points [0];
+
+		return points;
+	}
+	
+	Vector3[] GetEdgePoints (EdgeCollider2D collider)
+	{
+		Vector3[] points = new Vector3[collider.points.Length];
+		for(int i = 0; i< collider.points.Length;i++)
+		{
+			Vector2 p = collider.points[i];
+			Vector3 point = collider.transform.TransformPoint(p.x+collider.offset.x,p.y+collider.offset.y,0);
+			points[i] = point;
+		}
 
 		return points;
 	}
@@ -158,7 +184,6 @@ public class DebugDrawPhysics2D : MonoBehaviour
 		}
 
 		circlePoints [segments] = circlePoints [0];
-		
 		return circlePoints;
 	}
 
@@ -194,6 +219,9 @@ public class DebugDrawPhysics2D : MonoBehaviour
 
 		polygonColliders2D = (PolygonCollider2D[])Resources.FindObjectsOfTypeAll(typeof(PolygonCollider2D));
 		polygonPointList = new Vector3[polygonColliders2D.Length][];
+		
+		edgeColliders2D = (EdgeCollider2D[])Resources.FindObjectsOfTypeAll (typeof(EdgeCollider2D));
+		edgePointList = new Vector3[edgeColliders2D.Length][];
 
 		anchoredJoints2D = (AnchoredJoint2D[])Resources.FindObjectsOfTypeAll (typeof(AnchoredJoint2D));
 		anchoredJointPointList = new Vector3[anchoredJoints2D.Length][];
@@ -218,6 +246,13 @@ public class DebugDrawPhysics2D : MonoBehaviour
 			Vector3[] polygonPoints = GetPolygonPoints(collider);
 			polygonPointList[i] = polygonPoints;
 		}
+		
+		for(int i = 0; i< edgeColliders2D.Length;i++)
+		{
+			EdgeCollider2D collider = edgeColliders2D[i];
+			Vector3[] edgePoints = GetEdgePoints(collider);
+			edgePointList[i] = edgePoints;
+		}
 
 		for(int i = 0; i< anchoredJoints2D.Length;i++)
 		{
@@ -229,7 +264,9 @@ public class DebugDrawPhysics2D : MonoBehaviour
 		DrawBox2DGizmo(boxPointList);
 		DrawBox2DGizmo(circlePointList);
 		DrawBox2DGizmo(polygonPointList);
+		DrawBox2DGizmo(edgePointList);
 		DrawBox2DGizmo(anchoredJointPointList);
+		
 	}
 
 	void DrawBox2DGizmo(Vector3[][] colliderPoints)
@@ -252,6 +289,7 @@ public class DebugDrawPhysics2D : MonoBehaviour
 		RenderColliders (polygonPointList, polygonColour);
 		RenderColliders (boxPointList, boxColour);
 		RenderColliders (circlePointList, circleColour);
+		RenderColliders (edgePointList, edgeColour);
 		RenderColliders (anchoredJointPointList, jointColour);
 	}
 
